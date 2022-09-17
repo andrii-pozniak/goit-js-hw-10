@@ -8,29 +8,49 @@ const refs = {
 
 let debounce = require('lodash.debounce');
 
-// fetchCountries('sweden')
-// .then(callCountry)
-// .catch(error => console.log(error))
-function onNameCountry(e) {
+
+function onNameCountry() {
     // const form = e.currentTarget;
-    const name = refs.input.value;
-    console.log(name)
-    fetchCountries(name)
+    const countries = refs.input.value;
+    // console.log(countries)
+    fetchCountries(countries)
     .then(callCountry)
-    .catch(error => console.log(error))    
+    .catch(onNameError)    
 }
 
-function fetchCountries(name) {
-return fetch(`https://restcountries.com/v3.1/name/${name}
+function fetchCountries(countries) {
+return fetch(`https://restcountries.com/v3.1/name/${countries}
     `).then(response => {
+       if (response.status === 200) {
+     
         return response.json;
-    }) 
+       } else{
+        Notiflix.Notify.failure(` Oops, there is no country with that name`);
+       }
+       
+    })
 }; 
 
 refs.input.addEventListener(`input`, debounce(onNameCountry, 150));
 
+function onNameError(error) {
+   Notiflix.Notify.failure(` Oops, there is no country with that name`);
+   
+}
 
+function callCountry(countries) {
+   const makeUp = countries.map((country) => {
+    return refs.countryList.innerHTML = `<li class="country_name">  <img class="country__image"
+    src="${country.flag.svg}"
+    
+    alt="${country.name.official}"
+    /><p>"${country.capital}"
+    </p><p>"${country.population}"</p>
+    <p>"${country.languages}"</p></li>`
+   
+   }).join("")
 
-function callCountry(e) {
+   refs.countryList.innerHTML = makeUp;
+   console.log(makeUp)
    
 }
