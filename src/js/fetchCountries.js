@@ -20,37 +20,34 @@ function onNameCountry() {
 
 function fetchCountries(countries) {
 return fetch(`https://restcountries.com/v3.1/name/${countries}
-    `).then(response => {
-       if (response.status === 200) {
-     
-        return response.json;
-       } else{
-        Notiflix.Notify.failure(` Oops, there is no country with that name`);
-       }
-       
+    `).then(countries => {
+       if ( countries.length > 10) {
+        console.log(countries.length)
+        Notiflix.Notify.success(` Too many matches found. Please enter a more specific name.`);
+        
+       } 
+       return response.json();
     })
 }; 
 
-refs.input.addEventListener(`input`, debounce(onNameCountry, 150));
+refs.input.addEventListener(`input`, debounce(onNameCountry, 300));
 
 function onNameError(error) {
    Notiflix.Notify.failure(` Oops, there is no country with that name`);
    
 }
-
 function callCountry(countries) {
-   const makeUp = countries.map((country) => {
-    return refs.countryList.innerHTML = `<li class="country_name">  <img class="country__image"
-    src="${country.flag.svg}"
+    console.log(countries.name)
+//    const makeUp = countries.map((country) => {
+//     return   `<div>  
     
-    alt="${country.name.official}"
-    /><p>"${country.capital}"
-    </p><p>"${country.population}"</p>
-    <p>"${country.languages}"</p></li>`
+//     <p>capital:${country.capital}</p>
+//     <p>capital:${country.population}</p>
    
-   }).join("")
-
-   refs.countryList.innerHTML = makeUp;
-   console.log(makeUp)
+//    </div>`
+   
+//    }).join("")
+//    refs.countryList.innerHTML = makeUp;
+//    console.log(makeUp)
    
 }
