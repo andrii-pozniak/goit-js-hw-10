@@ -9,7 +9,7 @@ let debounce = require('lodash.debounce');
 
 function onNameCountry() {
    
-    const countries = refs.input.value;
+    const countries = refs.input.value.trim();
    
     API.fetchCountries(countries)
     .then(callCountry)
@@ -34,17 +34,18 @@ function callCountry(countries) {
         console.log("ok")
          return countries.map(({capital, population, flags: 
            {svg}, languages, name:{official}}) => {
-            return   refs.countryList.innerHTML = `<div class = "country_cart">  
-    
-               <p>Capital: ${capital}</p>  
-              <p>Population: ${population}</p> 
-            
-                <p>Languages: ${Object.values(languages)}</p> 
-               <img class="image_countryCart" src=${svg}
+            return   refs.countryList.innerHTML = `<div class = "country_name">  
+                                 
+               <img class="image_country" src=${svg}
                 alt=${official}
                 width="80" heighth="50"
                 />
-               </div>`
+                <h2>Country: ${official}</h2>
+                </div>
+                <p><b>Capital:</b> ${capital}</p>  
+                <p><b>Population: </b> ${population}</p> 
+                <p><b>Languages: </b> ${Object.values(languages)}</p>` 
+               
             }).join("  ")
         
     //     countryCart()
@@ -55,7 +56,7 @@ function callCountry(countries) {
         return   `<div class = "country_name">  
         <img class="image_country" src=${country.flags.svg}
         alt=${country.name.official}
-        width="80" heighth="50"
+        width="60" 
         />
         <p>${country.name.official}</p>   
        </div>`
