@@ -49,7 +49,7 @@ function callCountry(countries) {
             }).join("  ")
         
   
-        return  refs.countryList.innerHTML = makeCart;
+       
     };
    console.log("10")
     const makeUp = countries.map((country) => {
