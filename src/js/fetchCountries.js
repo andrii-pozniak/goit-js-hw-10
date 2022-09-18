@@ -6,7 +6,6 @@ const refs = getRefs()
 
 let debounce = require('lodash.debounce');
 
-
 function onNameCountry() {
    
     const countries = refs.input.value.trim();
@@ -19,7 +18,7 @@ function onNameCountry() {
 refs.input.addEventListener(`input`, debounce(onNameCountry, 300));
 
 function onNameError(error) {
-    // console.log(countries.name)
+   
    Notiflix.Notify.failure(` Oops, there is no country with that name`);
    
 }
@@ -34,7 +33,7 @@ function callCountry(countries) {
         console.log("ok")
          return countries.map(({capital, population, flags: 
            {svg}, languages, name:{official}}) => {
-            return   refs.countryList.innerHTML = `<div class = "country_name">  
+            return   refs.countryList.innerHTML = `<div><div class = "country_name">  
                                  
                <img class="image_country" src=${svg}
                 alt=${official}
@@ -44,11 +43,12 @@ function callCountry(countries) {
                 </div>
                 <p><b>Capital:</b> ${capital}</p>  
                 <p><b>Population: </b> ${population}</p> 
-                <p><b>Languages: </b> ${Object.values(languages)}</p>` 
-               
+                <p><b>Languages: </b> ${Object.values(languages)}</p>
+                </div>` 
+                
             }).join("  ")
         
-    //     countryCart()
+  
         return  refs.countryList.innerHTML = makeCart;
     };
    console.log("10")
