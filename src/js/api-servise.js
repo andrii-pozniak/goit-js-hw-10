@@ -1,6 +1,6 @@
-const BASE_URL = https://restcountries.com/v3.1
+const BASE_URL = 'https://restcountries.com/v3.1'
 function fetchCountries(countries) {
-    return fetch(${BASE_URL}/name/${countries}
+    return fetch(`${BASE_URL}/name/${countries}
         `).then(countries => {
            if ( countries.length > 10) {
             console.log(countries.length)
@@ -9,3 +9,5 @@ function fetchCountries(countries) {
            } 
         })
     }; 
+
+    export default {fetchCountries}
