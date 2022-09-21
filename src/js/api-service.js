@@ -5,12 +5,7 @@ const refs = getRefs()
 const BASE_URL = 'https://restcountries.com/v3.1/name/'
 
 function fetchCountries(countries) {
-    // if (countries === ' ') {
-    //     refs.countryList.innerHTML = ``; 
-    //     console.log(refs.input.value)
-    //       return;      
-    // };
-    // console.log(refs.input.value)
+   
     return fetch(`${BASE_URL}${countries}
         `).then(response => {
             

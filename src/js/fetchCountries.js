@@ -82,33 +82,3 @@ console.log(makeUp)
     
    }
   
-//    if (countries.length === 1) {
-//     return   `<div class = "country_cart">  
-    
-//     <p>capital: ${country.capital}</p>  
-//     <p>population: ${country.population}</p> 
-
-//     <p>${country.languages}</p> 
-//     <img class="image_countryCart" src=${country.flags.svg}
-//     alt=${country.name.official}
-//     width="80" heighth="50"
-//     />
-//    </div>`
-   
-   
-   
-
-
-// function countryCart(countries) {
-//     return  refs.countryList.innerHTML = `<div class = "country_cart">  
-    
-//     <p>capital: ${country.capital}</p>  
-//     <p>population: ${country.population}</p> 
-
-//     <p>${country.languages}</p> 
-//     <img class="image_countryCart" src=${country.flags.svg}
-//     alt=${country.name.official}
-//     width="80" heighth="50"
-//     />
-//    </div>`
-// }
