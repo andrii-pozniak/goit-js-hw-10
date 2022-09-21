@@ -6,10 +6,15 @@ const refs = getRefs()
 
 let debounce = require('lodash.debounce');
 
-function onNameCountry() {
-   
-    const countries = refs.input.value.trim();
-   
+function onNameCountry(e) {
+    console.log(e.target.value)
+  
+    const countries = e.target.value.trim();
+        if (countries === ''){
+        refs.countryList.innerHTML = ``
+        return;
+       };
+       
     API.fetchCountries(countries)
     .then(callCountry)
     .catch(onNameError)    
@@ -17,16 +22,16 @@ function onNameCountry() {
 
 refs.input.addEventListener(`input`, debounce(onNameCountry, 300));
 
-function onNameError(error) {
-   
+function onNameError(error) {    
    Notiflix.Notify.failure(` Oops, there is no country with that name`);
-   
+  
 }
 function callCountry(countries) {
+   
     
     if (countries.length > 10) {
         Notiflix.Notify.success('Too many matches found. Please enter a more specific name.');
-
+       
         return;
     };
     if (countries.length <= 1){

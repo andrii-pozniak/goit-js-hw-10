@@ -1,7 +1,17 @@
-const BASE_URL = 'https://restcountries.com/v3.1'
+import getRefs from "./getRefs";
+
+const refs = getRefs()
+
+const BASE_URL = 'https://restcountries.com/v3.1/name/'
 
 function fetchCountries(countries) {
-    return fetch(`${BASE_URL}/name/${countries}
+    // if (countries === ' ') {
+    //     refs.countryList.innerHTML = ``; 
+    //     console.log(refs.input.value)
+    //       return;      
+    // };
+    // console.log(refs.input.value)
+    return fetch(`${BASE_URL}${countries}
         `).then(response => {
             
            if ( response.status === 200 ) {
