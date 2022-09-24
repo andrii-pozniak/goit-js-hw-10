@@ -22,8 +22,15 @@ function onNameCountry(e) {
 
 refs.input.addEventListener(`input`, debounce(onNameCountry, 300));
 
-function onNameError(error) {    
+function resetForm() {
+    refs.countryList.innerHTML = ``;
+    refs.input.value = '';
+}
+
+function onNameError(error) { 
+    resetForm()
    Notiflix.Notify.failure(` Oops, there is no country with that name`);
+  
   
 }
 function callCountry(countries) {
@@ -31,11 +38,12 @@ function callCountry(countries) {
     
     if (countries.length > 10) {
         Notiflix.Notify.success('Too many matches found. Please enter a more specific name.');
+        refs.countryList.innerHTML = ``;
        
         return;
     };
     if (countries.length <= 1){
-        console.log("ok")
+        // console.log("ok")
          return countries.map(({capital, population, flags: 
            {svg}, languages, name:{official}}) => {
             return   refs.countryList.innerHTML = `<div><div class = "country_name">  
@@ -49,14 +57,14 @@ function callCountry(countries) {
                 <p><b>Capital:</b> ${capital}</p>  
                 <p><b>Population: </b> ${population}</p> 
                 <p><b>Languages: </b> ${Object.values(languages)}</p>
-                </div>` 
+                </div>` ;
                 
             }).join("  ")
         
   
        
     };
-   console.log("10")
+//   console.log("10")
     const makeUp = countries.map((country) => {
         return   `<div class = "country_name">  
         <img class="image_country" src=${country.flags.svg}
@@ -72,7 +80,7 @@ function callCountry(countries) {
 console.log(makeUp)
 
     
-    console.log("ok")
+    // console.log("ok")
    
 
     
