@@ -1,6 +1,8 @@
 import Notiflix from 'notiflix';
 import API from "./api-service";
 import getRefs from "./getRefs";
+import cartCountry from "./cart";
+
 
 const refs = getRefs()
 
@@ -9,13 +11,13 @@ let debounce = require('lodash.debounce');
 function onNameCountry(e) {
     console.log(e.target.value)
   
-    const countries = e.target.value.trim();
-        if (countries === ''){
+    const nameCountries = e.target.value.trim();
+        if (nameCountries === ''){
         refs.countryList.innerHTML = ``
         return;
        };
        
-    API.fetchCountries(countries)
+    API.fetchCountries(nameCountries)
     .then(callCountry)
     .catch(onNameError)    
 }
@@ -33,8 +35,7 @@ function onNameError(error) {
   
   
 }
-function callCountry(countries) {
-   
+function callCountry(countries) {   
     
     if (countries.length > 10) {
         Notiflix.Notify.success('Too many matches found. Please enter a more specific name.');
@@ -43,25 +44,9 @@ function callCountry(countries) {
         return;
     };
     if (countries.length <= 1){
-        // console.log("ok")
-         return countries.map(({capital, population, flags: 
-           {svg}, languages, name:{official}}) => {
-            return   refs.countryList.innerHTML = `<div><div class = "country_name">  
-                                 
-               <img class="image_country" src=${svg}
-                alt=${official}
-                width="80" heighth="50"
-                />
-                <h2>Country: ${official}</h2>
-                </div>
-                <p><b>Capital:</b> ${capital}</p>  
-                <p><b>Population: </b> ${population}</p> 
-                <p><b>Languages: </b> ${Object.values(languages)}</p>
-                </div>` ;
-                
-            }).join("  ")
-        
-  
+        console.log("ok")
+        const makeCountry = countries.map(country => cartCountry(country)).join("  ");      
+        return refs.countryList.innerHTML = makeCountry;
        
     };
 //   console.log("10")
